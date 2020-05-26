@@ -5,12 +5,13 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class AddUserToPosts1590452073247 implements MigrationInterface {
+export default class AddCommentsToPosts1590522512965
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
       'posts',
       new TableColumn({
-        name: 'user_id',
+        name: 'comment_id',
         type: 'uuid',
         isNullable: true,
       }),
@@ -19,10 +20,10 @@ export default class AddUserToPosts1590452073247 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'posts',
       new TableForeignKey({
-        name: 'PostUser',
-        columnNames: ['user_id'],
+        name: 'PostComments',
+        columnNames: ['comment_id'],
+        referencedTableName: 'comments',
         referencedColumnNames: ['id'],
-        referencedTableName: 'users',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -30,7 +31,7 @@ export default class AddUserToPosts1590452073247 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('posts', 'PostUser');
-    await queryRunner.dropColumn('posts', 'user_id');
+    await queryRunner.dropForeignKey('posts', 'PostComments');
+    await queryRunner.dropColumn('posts', 'comments');
   }
 }
