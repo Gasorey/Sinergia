@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  JoinColumn,
 } from 'typeorm';
 import User from './User';
 
@@ -24,7 +23,6 @@ class Post {
   updated_at: Date;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
   user: User;
 }
 export default Post;

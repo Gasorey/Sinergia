@@ -33,6 +33,16 @@ class UsersRepository implements IUsersRepository {
   public async save(user: User): Promise<User> {
     return this.ormRepository.save(user);
   }
+
+  public async delete(email: string): Promise<void> {
+    const user = await this.ormRepository.findOne({
+      where: { email },
+    });
+
+    if (user) {
+      await this.ormRepository.remove(user);
+    }
+  }
 }
 
 export default UsersRepository;

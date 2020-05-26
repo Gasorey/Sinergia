@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import User from './User';
+import Post from './Post';
 
 @Entity('comments')
 class Comment {
@@ -16,6 +19,12 @@ class Comment {
 
   @Column('uuid')
   user_id: string;
+
+  @ManyToOne(() => User)
+  user: User;
+
+  @ManyToOne(() => Post)
+  post: Post;
 
   @Column('uuid')
   post_id: string;

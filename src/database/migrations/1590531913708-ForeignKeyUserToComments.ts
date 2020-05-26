@@ -1,11 +1,22 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
 
-export class ForeignKeyUserToComments1590531913708 implements MigrationInterface {
+export default class ForeignKeyUserToComments1590531913708
+  implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createForeignKey(
+      'comments',
+      new TableForeignKey({
+        name: 'UserComment',
+        columnNames: ['user_id'],
+        referencedTableName: 'users',
+        referencedColumnNames: ['id'],
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    );
+  }
 
-    public async up(queryRunner: QueryRunner): Promise<void> {
-    }
-
-    public async down(queryRunner: QueryRunner): Promise<void> {
-    }
-
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey('comments', 'user_id');
+  }
 }
