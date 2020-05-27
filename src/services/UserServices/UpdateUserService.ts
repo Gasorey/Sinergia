@@ -27,7 +27,6 @@ class UpdateUserService {
     old_password,
   }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
-
     if (!user) {
       throw new AppError('This user doest exist');
     }
@@ -46,19 +45,16 @@ class UpdateUserService {
     }
 
     if (password && old_password) {
-      const checkOldPass = await compare(old_password, user.password);
-
+      const checkOldPassword = await compare(old_password, user.password);
       console.log(old_password);
-      console.log(user.password);
-      console.log(checkOldPass);
+      console.log(password);
 
-      if (checkOldPass === true) {
-        throw new AppError('Old password does not match');
+      if (!checkOldPassword) {
+        throw new AppError('Old password does not match.');
       }
-
       user.password = await hash(password, 8);
     }
-
+    console.log(user.password);
     return this.usersRepository.save(user);
   }
 }

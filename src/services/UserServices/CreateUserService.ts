@@ -20,18 +20,15 @@ class CreateUserService {
 
   public async execute({ name, password, email }: IRequest): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
-
     if (checkUserExists) {
       throw new AppError('E-mail address already used.');
     }
     const hashPass = await hash(password, 8);
-
     const user = await this.usersRepository.create({
       email,
       name,
       password: hashPass,
     });
-
     return user;
   }
 }
