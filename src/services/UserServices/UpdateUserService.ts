@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
-import { compare, hash } from 'bcrypt';
 import User from '../../database/typeorm/entities/User';
 import AppError from '../../errors/AppError';
 import IUsersRepository from '../../database/typeorm/repositories/interfaces/IUsersRepository';
+import IHashProvider from '../../provider/HashProvider/models/IHashProvider';
 
 interface IRequest {
   user_id: string;
@@ -17,6 +17,8 @@ class UpdateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
@@ -45,16 +47,16 @@ class UpdateUserService {
     }
 
     if (password && old_password) {
-      const checkOldPassword = await compare(old_password, user.password);
-      console.log(old_password);
-      console.log(password);
+      const checkOldPassword = await this.hashProvider.compareHash(
+        old_password,
+        user.password,
+      );
 
       if (!checkOldPassword) {
         throw new AppError('Old password does not match.');
       }
-      user.password = await hash(password, 8);
+      user.password = await this.hashProvider.generateHash(password);
     }
-    console.log(user.password);
     return this.usersRepository.save(user);
   }
 }

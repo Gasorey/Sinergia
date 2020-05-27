@@ -2,8 +2,10 @@ import FakeUsersRepository from '../../database/typeorm/repositories/fakes/FakeU
 import DeleteUserService from './DeleteUserService';
 import CreateUserService from './CreateUserService';
 import AppError from '../../errors/AppError';
+import FakeHashProvider from '../../provider/HashProvider/fakes/FakeHashProvider';
 
 let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
 
 let createUser: CreateUserService;
 let deleteUser: DeleteUserService;
@@ -11,8 +13,9 @@ let deleteUser: DeleteUserService;
 describe('CreateUser', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
 
-    createUser = new CreateUserService(fakeUsersRepository);
+    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
     deleteUser = new DeleteUserService(fakeUsersRepository);
   });
   it('shoud be able to delete an user', async () => {

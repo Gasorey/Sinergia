@@ -1,7 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '../../errors/AppError';
 
-import User from '../../database/typeorm/entities/User';
 import IUsersRepository from '../../database/typeorm/repositories/interfaces/IUsersRepository';
 
 interface IRequest {

@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'dotenv';
 import express, { NextFunction, Response, Request } from 'express';
 import AppError from './errors/AppError';
 
