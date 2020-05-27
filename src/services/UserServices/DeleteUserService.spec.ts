@@ -29,8 +29,14 @@ describe('CreateUser', () => {
     expect(!user);
   });
   it('should not be able to delete and user that does not exist', async () => {
-    const {email} = 'fake@email.com'
+    await createUser.execute({
+      name: 'Gabriel Sinergia',
+      email: 'Gasorey@sinergia.com',
+      password: 'sinergia',
+    });
 
-    await expect(deleteUser.execute({email}))
-  }
+    await expect(
+      deleteUser.execute({ email: 'wrongemail@mail.com' }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

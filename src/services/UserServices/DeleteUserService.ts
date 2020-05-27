@@ -20,9 +20,10 @@ class DeleteUserService {
   public async execute({ email }: IRequest): Promise<void> {
     const findUser = await this.usersRepository.findByEmail(email);
 
-    if (findUser) {
-      await this.usersRepository.delete(email);
+    if (!findUser) {
+      throw new AppError('This user does not exist');
     }
+    await this.usersRepository.delete(email);
   }
 }
 export default DeleteUserService;
