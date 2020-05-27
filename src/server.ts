@@ -1,11 +1,14 @@
 import 'reflect-metadata';
 import 'dotenv';
+import cors from 'cors';
 import express, { NextFunction, Response, Request } from 'express';
 import AppError from './errors/AppError';
 
 import routes from './routes';
 
 const app = express();
+
+app.use(cors());
 
 app.use(routes);
 

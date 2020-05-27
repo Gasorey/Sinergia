@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import User from '../../database/typeorm/entities/User';
 import authConfig from '../../config/auth';
 import AppError from '../../errors/AppError';
-import IUserRepository from '../../database/typeorm/repositories/UsersRepository';
+import IUsersRepository from '../../database/typeorm/repositories/interfaces/IUsersRepository';
 import IHashProvider from '../../provider/HashProvider/models/IHashProvider';
 
 interface IRequest {
@@ -20,7 +20,7 @@ interface IResponse {
 class AuthenticateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUserRepository,
+    private usersRepository: IUsersRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,

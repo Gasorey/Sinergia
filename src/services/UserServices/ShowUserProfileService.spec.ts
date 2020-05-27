@@ -1,6 +1,6 @@
 import FakeUsersRepository from '../../database/typeorm/repositories/fakes/FakeUsersRepository';
 import AppError from '../../errors/AppError';
-import ShowUserProfile from './ShowUserProfile';
+import ShowUserProfile from './ShowUserProfileService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let showUserProfile: ShowUserProfile;
