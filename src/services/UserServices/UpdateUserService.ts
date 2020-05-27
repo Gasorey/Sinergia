@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import { compare, hash } from 'bcrypt';
 import User from '../../database/typeorm/entities/User';
 import AppError from '../../errors/AppError';
 import IUsersRepository from '../../database/typeorm/repositories/interfaces/IUsersRepository';
@@ -22,8 +23,43 @@ class UpdateUserService {
     email,
     user_id,
     name,
-    old_password,
     password,
-  }: IRequest): Promise<User> {}
+    old_password,
+  }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(user_id);
+
+    if (!user) {
+      throw new AppError('This user doest exist');
+    }
+
+    const checkEmail = await this.usersRepository.findByEmail(email);
+
+    if (checkEmail && checkEmail.id !== user_id) {
+      throw new AppError('This email is already in use');
+    }
+
+    user.name = name;
+    user.email = email;
+
+    if (password && !old_password) {
+      throw new AppError('Old password must be informed');
+    }
+
+    if (password && old_password) {
+      const checkOldPass = await compare(old_password, user.password);
+
+      console.log(old_password);
+      console.log(user.password);
+      console.log(checkOldPass);
+
+      if (checkOldPass === true) {
+        throw new AppError('Old password does not match');
+      }
+
+      user.password = await hash(password, 8);
+    }
+
+    return this.usersRepository.save(user);
+  }
 }
 export default UpdateUserService;
