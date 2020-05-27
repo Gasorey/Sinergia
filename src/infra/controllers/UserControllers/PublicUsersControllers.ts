@@ -7,9 +7,9 @@ import CreateUserService from '../../../services/UserServices/CreateUserService'
 
 export default class PublicUsersController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, email, password } = request.body;
+    const { name, email, password } = await request.body;
 
-    const createUser = await container.resolve(CreateUserService);
+    const createUser = container.resolve(CreateUserService);
 
     const user = await createUser.execute({
       name,

@@ -1,3 +1,4 @@
+import '../provider';
 import { container } from 'tsyringe';
 
 import UsersRepository from '../database/typeorm/repositories/UsersRepository';

@@ -1,9 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '../../errors/AppError';
-import IHashProvider from '../../provider/HashProvider/models/IHashProvider';
-
 import User from '../../database/typeorm/entities/User';
 import IUsersRepository from '../../database/typeorm/repositories/interfaces/IUsersRepository';
+import IHashProvider from '../../provider/HashProvider/models/IHashProvider';
 
 interface IRequest {
   name: string;
@@ -27,7 +26,8 @@ class CreateUserService {
       throw new AppError('E-mail address already used.');
     }
     const hashPass = await this.hashProvider.generateHash(password);
-    const user = await this.usersRepository.create({
+
+    const user = this.usersRepository.create({
       email,
       name,
       password: hashPass,
