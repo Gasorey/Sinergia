@@ -37,10 +37,12 @@ class FakeUsersRepository implements IUsersRepository {
   }
 
   public async delete(email: string): Promise<void> {
-    const findIndex = this.users.find(findUser => findUser.email === email);
+    const findIndex = this.users.findIndex(
+      findUser => findUser.email === email,
+    );
 
-    if (findIndex) {
-      this.users;
+    if (findIndex > 0) {
+      this.users.splice(findIndex, 1);
     }
   }
 }
