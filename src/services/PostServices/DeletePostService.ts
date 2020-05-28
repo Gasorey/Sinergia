@@ -20,8 +20,9 @@ export default class DeletePostService {
     if (!findPost) {
       throw new AppError('This post does not exist');
     }
-    if (findPost.user_id === user_id) {
-      await this.postsRepository.delete(id);
+    if (findPost.user_id !== user_id) {
+      throw new AppError('You can not delete a post from another user');
     }
+    await this.postsRepository.delete(id);
   }
 }

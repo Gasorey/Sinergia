@@ -16,12 +16,14 @@ export default class PrivateUsersController {
     return response.json(classToClass(user));
   }
 
-  public async delete(request: Request): Promise<void> {
+  public async delete(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
     const deleteProfile = container.resolve(DeleteUserService);
 
     await deleteProfile.execute({ email, password });
+
+    return response.status(204).send();
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
