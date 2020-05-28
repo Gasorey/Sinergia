@@ -1,5 +1,4 @@
 import { getRepository, Repository } from 'typeorm';
-import { response } from 'express';
 import User from '../entities/User';
 import IUsersRepository from './interfaces/IUsersRepository';
 import ICreateUserDTO from './dtos/ICreateUserDTO';

@@ -6,7 +6,7 @@ import IHashProvider from '../../provider/HashProvider/models/IHashProvider';
 
 interface IRequest {
   // name: string;
-  password?: string;
+  password: string;
   email: string;
 }
 
@@ -35,7 +35,6 @@ class DeleteUserService {
     if (!checkPass) {
       throw new AppError('Wrong password');
     }
-    console.log(checkPass);
     await this.usersRepository.delete(email);
   }
 }
