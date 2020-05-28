@@ -39,7 +39,10 @@ describe('CreateUser', () => {
     });
 
     await expect(
-      deleteUser.execute({ email: 'wrongemail@mail.com' }),
+      deleteUser.execute({
+        email: 'wrongemail@mail.com',
+        password: 'sinergia',
+      }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });
