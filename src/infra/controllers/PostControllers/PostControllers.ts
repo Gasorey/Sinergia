@@ -17,12 +17,13 @@ export default class PostController {
     return response.json(post);
   }
 
-  public async delete(request: Request): Promise<void> {
+  public async delete(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
-    const id = request.body;
+    const { post_id } = request.params;
 
     const deletePost = container.resolve(DeletePostService);
 
-    await deletePost.execute(id, user_id);
+    await deletePost.execute(post_id, user_id);
+    return response.status(204).send();
   }
 }
