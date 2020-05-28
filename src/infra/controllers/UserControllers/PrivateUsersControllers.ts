@@ -17,11 +17,11 @@ export default class PrivateUsersController {
   }
 
   public async delete(request: Request): Promise<void> {
-    const { email } = request.body;
+    const { email, password } = request.body;
 
     const deleteProfile = container.resolve(DeleteUserService);
 
-    await deleteProfile.execute({ email });
+    await deleteProfile.execute({ email, password });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -31,7 +31,7 @@ export default class PrivateUsersController {
 
     const updateUser = container.resolve(UpdateUserService);
 
-    const user = updateUser.execute({
+    const user = await updateUser.execute({
       email,
       name,
       user_id,

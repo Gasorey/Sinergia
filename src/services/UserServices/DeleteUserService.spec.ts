@@ -16,7 +16,7 @@ describe('CreateUser', () => {
     fakeHashProvider = new FakeHashProvider();
 
     createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
-    deleteUser = new DeleteUserService(fakeUsersRepository);
+    deleteUser = new DeleteUserService(fakeUsersRepository, fakeHashProvider);
   });
   it('shoud be able to delete an user', async () => {
     const user = await createUser.execute({
@@ -25,9 +25,9 @@ describe('CreateUser', () => {
       password: 'sinergia',
     });
 
-    const { email } = user;
+    const { email, password } = user;
 
-    await deleteUser.execute({ email });
+    await deleteUser.execute({ email, password });
 
     expect(!user);
   });
