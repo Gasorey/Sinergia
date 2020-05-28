@@ -23,7 +23,7 @@ class Comment {
   @ManyToOne(() => User)
   user: User;
 
-  @ManyToOne(type => Post, post => post.comment)
+  @ManyToOne(() => Post, post => post.comment)
   post: Post;
 
   @Column('uuid')

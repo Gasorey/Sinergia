@@ -31,5 +31,6 @@ describe('CreateUser', () => {
     });
     expect(post).toHaveProperty('id');
     expect(post.content).toBe('First Post');
+    expect(post.user_id).toBe(user.id);
   });
 });

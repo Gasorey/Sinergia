@@ -32,5 +32,7 @@ describe('DeleteService', () => {
       content: 'Primeiro post para teste',
       user_id: user.id,
     });
+    await deletePost.execute(post.id, user.id);
+    expect(!post);
   });
 });

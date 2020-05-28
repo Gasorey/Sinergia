@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 import Post from '../../database/typeorm/entities/Post';
 import IPostsRepository from '../../database/typeorm/repositories/interfaces/IPostsRepository';

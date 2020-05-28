@@ -32,7 +32,7 @@ class Post {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @OneToMany(type => Comment, comment => comment.post)
+  @OneToMany(() => Comment, comment => comment.post)
   comment: Comment[];
 }
 export default Post;
