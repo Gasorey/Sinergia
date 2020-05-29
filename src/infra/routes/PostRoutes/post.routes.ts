@@ -10,6 +10,6 @@ postRouter.use(ensureAuthenticated);
 postRouter.post('/', postControllers.create);
 postRouter.delete('/:post_id', postControllers.delete);
 postRouter.get('/listUser', postControllers.listUser);
-postRouter.get('/list', postControllers.list);
+postRouter.get('/listAll', postControllers.listAll);
 
 export default postRouter;

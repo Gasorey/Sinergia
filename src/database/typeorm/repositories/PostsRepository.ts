@@ -62,9 +62,10 @@ class PostsRepository implements IPostRepository {
     return post;
   }
 
-  public async findAllPost(): Promise<Post[] | undefined> {
-    const posts = await this.ormRepository.find();
-
+  public async findAllPost(user_id: string): Promise<Post[] | undefined> {
+    const posts = await this.ormRepository.find({
+      order: { created_at: 'DESC' },
+    });
     return posts;
   }
 }

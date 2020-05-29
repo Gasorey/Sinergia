@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 import CreatePostService from '../../../services/PostServices/CreatePostService';
 import DeletePostService from '../../../services/PostServices/DeletePostService';
 import ListAllPostsFromUser from '../../../services/PostServices/ListAllPostsFromUser';
-import ListAll from '../../../services/PostServices/ListAll';
+import ListAllService from '../../../services/PostServices/ListAllService';
 
 export default class PostController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -43,11 +43,14 @@ export default class PostController {
     return response.json(posts);
   }
 
-  public async list(request: Request, response: Response): Promise<Response> {
-    const listPost = container.resolve(ListAll);
+  public async listAll(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const user_id = request.user.id;
+    const listPosts = container.resolve(ListAllService);
 
-    const posts = listPost.execute();
-
+    const posts = listPosts.execute(user_id);
     return response.json(posts);
   }
 }
