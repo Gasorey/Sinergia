@@ -7,8 +7,8 @@ import ListAll from '../../../services/PostServices/ListAll';
 
 export default class PostController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const content = request.body;
     const user_id = request.user.id;
+    const content = request.body;
 
     const createPost = container.resolve(CreatePostService);
 
@@ -16,6 +16,7 @@ export default class PostController {
       content,
       user_id,
     });
+
     return response.json(post);
   }
 
@@ -43,11 +44,9 @@ export default class PostController {
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
-    const user_id = request.user.id;
-
     const listPost = container.resolve(ListAll);
 
-    const posts = listPost;
+    const posts = listPost.execute();
 
     return response.json(posts);
   }

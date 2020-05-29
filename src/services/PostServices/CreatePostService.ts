@@ -2,8 +2,6 @@ import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 import Post from '../../database/typeorm/entities/Post';
 import IPostsRepository from '../../database/typeorm/repositories/interfaces/IPostsRepository';
-import AppError from '../../errors/AppError';
-// import User from '../../database/typeorm/entities/User';
 
 interface IRequest {
   content: string;
