@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import Post from '../entities/Post';
 import IPostRepository from './interfaces/IPostsRepository';
 import ICreatePostDTO from './dtos/ICreatePostDTO';
+import IUpdatePostDTO from './dtos/IUpdatePostDTO';
 
 class PostsRepository implements IPostRepository {
   private ormRepository: Repository<Post>;
@@ -42,8 +43,8 @@ class PostsRepository implements IPostRepository {
     return posts;
   }
 
-  public async save(post: Post): Promise<Post> {
-    return this.ormRepository.save(post);
+  public async save(data: IUpdatePostDTO): Promise<Post> {
+    return this.ormRepository.save(data);
   }
 
   public async delete(id: string): Promise<void> {

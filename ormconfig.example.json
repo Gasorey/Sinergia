@@ -1,0 +1,17 @@
+{
+  "type":"postgres",
+  "host":"localhost",
+  "port":,
+  "username":"postgres",
+  "password":"docker",
+  "database":"sinergia",
+  "entities":[
+    "./src/database/typeorm/entities/*.ts"
+  ],
+  "migrations":[
+    "./src/database/migrations/*.ts"
+  ],
+  "cli":{
+    "migrationsDir":"./src/database/migrations"
+  }
+}
