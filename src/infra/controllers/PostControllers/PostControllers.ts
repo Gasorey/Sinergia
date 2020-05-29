@@ -4,11 +4,12 @@ import CreatePostService from '../../../services/PostServices/CreatePostService'
 import DeletePostService from '../../../services/PostServices/DeletePostService';
 import ListAllPostsFromUser from '../../../services/PostServices/ListAllPostsFromUser';
 import ListAllPosts from '../../../services/PostServices/ListAllService';
+import UpdatePostService from '../../../services/PostServices/UpdatePostService';
 
 export default class PostController {
   public async create(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
-    const content = request.body;
+    const { content } = request.body;
 
     const createPost = container.resolve(CreatePostService);
 
@@ -50,11 +51,19 @@ export default class PostController {
     const user_id = request.user.id;
     const listPosts = container.resolve(ListAllPosts);
 
-    const posts = listPosts.execute(user_id);
+    const posts = await listPosts.execute(user_id);
     return response.json(posts);
   }
-  // public async update( request: Request, response: Response): Promise<Response>{
-  //   const user_id = request.user.id;
-  //   const { content } = request.body
-  // }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+    const { id } = request.params;
+    const { content } = request.body;
+
+    const updatePost = container.resolve(UpdatePostService);
+
+    const updatedPost = await updatePost.execute({ user_id, id, content });
+
+    return response.json(updatedPost);
+  }
 }

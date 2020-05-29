@@ -1,7 +1,7 @@
 {
   "type":"postgres",
   "host":"localhost",
-  "port":,
+  "port":5432,
   "username":"postgres",
   "password":"docker",
   "database":"sinergia",

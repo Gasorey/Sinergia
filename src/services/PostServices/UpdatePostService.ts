@@ -17,9 +17,15 @@ export default class UpdatePostService {
     id,
   }: IUpdatePostDTO): Promise<Post> {
     const findPost = await this.postRepository.findPostById(id);
-
     if (!findPost) {
       throw new AppError('This post does not exist');
     }
+    if (findPost.user_id !== user_id) {
+      throw new AppError('You cannot update your own post');
+    }
+    findPost.content = content;
+    await this.postRepository.save(findPost);
+
+    return findPost;
   }
 }

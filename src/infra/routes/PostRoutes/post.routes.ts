@@ -11,6 +11,6 @@ postRouter.post('/', postControllers.create);
 postRouter.delete('/:post_id', postControllers.delete);
 postRouter.get('/listUser', postControllers.listUser);
 postRouter.get('/listAll', postControllers.listAll);
-// postRouter.put('/updatePost', postControllers.update);
+postRouter.put('/:id/update', postControllers.update);
 
 export default postRouter;
