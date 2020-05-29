@@ -6,8 +6,8 @@ import ICreatePostDTO from '../dtos/ICreatePostDTO';
 class FakePostsRepository implements IPostsRepository {
   private posts: Post[] = [];
 
-  public async findPostsByUserId(id: string): Promise<Post[] | undefined> {
-    const findPosts = this.posts.filter(post => post.user.id === id);
+  public async findPostsByUserId(user_id: string): Promise<Post[] | undefined> {
+    const findPosts = this.posts.filter(post => post.user_id === user_id);
 
     return findPosts;
   }

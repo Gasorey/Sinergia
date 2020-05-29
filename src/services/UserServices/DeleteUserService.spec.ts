@@ -41,7 +41,21 @@ describe('CreateUser', () => {
     await expect(
       deleteUser.execute({
         email: 'wrongemail@mail.com',
-        password: 'sinergia',
+        password: 'wrongpass',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+  it('should not be able to delete and user that does not exist', async () => {
+    await createUser.execute({
+      name: 'Gabriel Sinergia',
+      email: 'Gasorey@sinergia.com',
+      password: 'sinergia',
+    });
+
+    await expect(
+      deleteUser.execute({
+        email: 'Gasorey@sinergia.com',
+        password: 'wrongpass',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

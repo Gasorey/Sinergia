@@ -65,4 +65,46 @@ describe('UpdateUser', () => {
     });
     expect(updatedUser.password).toBe('novaSenha');
   });
+  it('should not be able to update a non-existing user ', async () => {
+    await expect(
+      updateUserService.execute({
+        user_id: 'non-existing-id',
+        name: 'Gabriel Asorey',
+        email: 'ThisDoesntExist@sinergia.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+  it('should not be able to update the user password without the old password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Gabriel Asorey',
+      email: 'gasorey@gmail.com',
+      password: 'senha',
+    });
+
+    await expect(
+      updateUserService.execute({
+        email: 'gasorey@gmail.com',
+        name: 'Gabriel Asorey',
+        user_id: user.id,
+        password: 'novaSenha',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+  it('should not be able to update the user password without the old password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Gabriel Asorey',
+      email: 'gasorey@gmail.com',
+      password: 'senha',
+    });
+
+    await expect(
+      updateUserService.execute({
+        email: 'gasorey@gmail.com',
+        name: 'Gabriel Asorey',
+        user_id: user.id,
+        old_password: 'SenhaErrada',
+        password: 'novaSenha',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

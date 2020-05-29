@@ -9,5 +9,6 @@ const postControllers = new PostControllers();
 postRouter.use(ensureAuthenticated);
 postRouter.post('/', postControllers.create);
 postRouter.delete('/:post_id', postControllers.delete);
+postRouter.get('/list', postControllers.list);
 
 export default postRouter;

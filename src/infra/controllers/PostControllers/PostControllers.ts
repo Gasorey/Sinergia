@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreatePostService from '../../../services/PostServices/CreatePostService';
 import DeletePostService from '../../../services/PostServices/DeletePostService';
+import ListAllPostsFromUser from '../../../services/PostServices/ListAllPostsFromUser';
 
 export default class PostController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -25,5 +26,15 @@ export default class PostController {
 
     await deletePost.execute(post_id, user_id);
     return response.status(204).send();
+  }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+
+    const listPost = container.resolve(ListAllPostsFromUser);
+
+    const posts = await listPost.execute(user_id);
+
+    return response.json(posts);
   }
 }

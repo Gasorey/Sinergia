@@ -31,11 +31,11 @@ class PostsRepository implements IPostRepository {
     return posts;
   }
 
-  public async findPostsByUserId(user_id: string): Promise<Post[] | undefined> {
+  public async findPostsByUserId(id: string): Promise<Post[] | undefined> {
     const posts = await this.ormRepository.find({
       where: {
         user: {
-          user_id,
+          id,
         },
       },
     });
