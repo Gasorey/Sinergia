@@ -42,6 +42,5 @@ describe('List Posts from user', () => {
     });
     const list = listAllPosts.execute(user.id);
     expect((await list).length).toEqual(3);
-    // expect(list).toEqual((await list).length === 2);
   });
 });

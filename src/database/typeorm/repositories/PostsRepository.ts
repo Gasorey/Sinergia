@@ -61,5 +61,11 @@ class PostsRepository implements IPostRepository {
     });
     return post;
   }
+
+  public async findAllPost(id: string): Promise<Post[] | undefined> {
+    const posts = await this.ormRepository.find();
+
+    return posts;
+  }
 }
 export default PostsRepository;

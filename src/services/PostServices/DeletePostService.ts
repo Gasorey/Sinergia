@@ -2,11 +2,6 @@ import { inject, injectable } from 'tsyringe';
 import IPostsRepository from '../../database/typeorm/repositories/interfaces/IPostsRepository';
 import AppError from '../../errors/AppError';
 
-interface IRequest {
-  id: string;
-  user_id: string;
-}
-
 @injectable()
 export default class DeletePostService {
   constructor(
