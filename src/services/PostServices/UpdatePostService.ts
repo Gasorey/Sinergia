@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 import AppError from '../../errors/AppError';
 import IPostRepository from '../../database/typeorm/repositories/interfaces/IPostsRepository';
@@ -21,7 +22,7 @@ export default class UpdatePostService {
       throw new AppError('This post does not exist');
     }
     if (findPost.user_id !== user_id) {
-      throw new AppError('You cannot update your own post');
+      throw new AppError('You cannot update a post from another user');
     }
     findPost.content = content;
     await this.postRepository.save(findPost);

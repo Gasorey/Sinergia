@@ -2,6 +2,7 @@ import { uuid } from 'uuidv4';
 import Post from '../../entities/Post';
 import IPostsRepository from '../interfaces/IPostsRepository';
 import ICreatePostDTO from '../dtos/ICreatePostDTO';
+import IUpdatePostDTO from '../dtos/IUpdatePostDTO';
 
 class FakePostsRepository implements IPostsRepository {
   private posts: Post[] = [];
@@ -30,10 +31,12 @@ class FakePostsRepository implements IPostsRepository {
     return post;
   }
 
-  public async save(post: Post): Promise<Post> {
-    const findIndex = this.posts.findIndex(findPost => findPost.id === post.id);
+  public async save({ user_id, content, id }: IUpdatePostDTO): Promise<Post> {
+    const findIndex = this.posts.findIndex(findPost => findPost.id === id);
 
-    this.posts[findIndex] = post;
+    const post = this.posts[findIndex];
+
+    post.content = content;
 
     return post;
   }
