@@ -53,4 +53,8 @@ export default class PostController {
     const posts = listPosts.execute(user_id);
     return response.json(posts);
   }
+  // public async update( request: Request, response: Response): Promise<Response>{
+  //   const user_id = request.user.id;
+  //   const { content } = request.body
+  // }
 }
