@@ -18,9 +18,15 @@ class Comment {
   @Column('varchar')
   content: string;
 
+  @Column('uuid')
+  user_id: string;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @Column('uuid')
+  post_id: string;
 
   @ManyToOne(() => Post, post => post.comment_id)
   @JoinColumn({ name: 'post_id' })
