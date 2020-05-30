@@ -20,6 +20,7 @@ class CreatePostsService {
       content,
       user_id,
     });
+
     return post;
   }
 }

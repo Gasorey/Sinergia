@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import User from './User';
 import Post from './Post';
@@ -21,6 +22,7 @@ class Comment {
   user_id: string;
 
   @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @ManyToOne(() => Post, post => post.comment)

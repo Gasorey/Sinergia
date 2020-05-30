@@ -10,9 +10,17 @@ class CommentsRepository implements ICommentsRepository {
     this.ormRepository = getRepository(Comment);
   }
 
-  public async create(commentData: ICreateCommentDTO): Promise<Comment> {
-    const comment = this.ormRepository.create(commentData);
-
+  public async create({
+    post_id,
+    content,
+    user_id,
+  }: ICreateCommentDTO): Promise<Comment> {
+    const comment = this.ormRepository.create({
+      content,
+      post_id,
+      user_id,
+    });
+    console.log(comment);
     await this.ormRepository.save(comment);
 
     return comment;

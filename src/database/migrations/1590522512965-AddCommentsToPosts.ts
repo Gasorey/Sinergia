@@ -32,6 +32,6 @@ export default class AddCommentsToPosts1590522512965
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('posts', 'PostComments');
-    await queryRunner.dropColumn('posts', 'comments');
+    await queryRunner.dropColumn('posts', 'comment_id');
   }
 }

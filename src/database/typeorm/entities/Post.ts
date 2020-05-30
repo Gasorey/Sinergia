@@ -7,6 +7,7 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  JoinTable,
 } from 'typeorm';
 import User from './User';
 import Comment from './Comment';
@@ -32,7 +33,11 @@ class Post {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
+  @Column('uuid')
+  comment_id: string;
+
   @OneToMany(() => Comment, comment => comment.post)
+  @JoinTable()
   comment: Comment[];
 }
 export default Post;

@@ -17,6 +17,6 @@ export default class ForeignKeyUserToComments1590531913708
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('comments', 'user_id');
+    await queryRunner.dropForeignKey('comments', 'UserComment');
   }
 }

@@ -8,3 +8,5 @@ const commentController = new CommentController();
 
 commentRouter.use(ensureAuthenticated);
 commentRouter.post('/:post_id/createComment', commentController.create);
+
+export default commentRouter;
