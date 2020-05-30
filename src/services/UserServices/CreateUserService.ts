@@ -25,7 +25,6 @@ class CreateUserService {
     if (checkUserExists) {
       throw new AppError('E-mail address already used.');
     }
-    console.log(email);
     const hashPass = await this.hashProvider.generateHash(password);
 
     const user = this.usersRepository.create({

@@ -32,10 +32,7 @@ class Post {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column('uuid')
-  comment_id: string;
-
-  @OneToMany(() => Comment, comment => comment.post.comment_id)
-  comment: Comment[];
+  @OneToMany(() => Comment, comment => comment.post)
+  comments: Comment[];
 }
 export default Post;

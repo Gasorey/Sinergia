@@ -58,6 +58,7 @@ class PostsRepository implements IPostRepository {
 
   public async findPostById(id: string): Promise<Post | undefined> {
     const post = await this.ormRepository.findOne({
+      relations: ['comments'],
       where: { id },
     });
     return post;

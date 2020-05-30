@@ -22,7 +22,6 @@ export default class UpdatePostService {
     if (!findPost) {
       throw new AppError('This post does not exist');
     }
-<<<<<<< HEAD
     if (findPost.user_id !== user_id) {
       throw new AppError('You cannot update a post from another user');
     }
@@ -30,7 +29,5 @@ export default class UpdatePostService {
     await this.postRepository.save(findPost);
 
     return findPost;
-=======
->>>>>>> parent of 560af20... sinergia test on going
   }
 }

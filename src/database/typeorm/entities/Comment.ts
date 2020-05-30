@@ -28,7 +28,7 @@ class Comment {
   @Column('uuid')
   post_id: string;
 
-  @ManyToOne(() => Post, post => post.comment_id)
+  @ManyToOne(() => Post, post => post)
   @JoinColumn({ name: 'post_id' })
   post: Post;
 
