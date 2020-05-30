@@ -76,7 +76,6 @@ export default class PostController {
 
     const showPost = container.resolve(ShowOnePost);
 
-    console.log(showPost);
     const post = await showPost.execute(id);
     return response.json(post);
   }

@@ -1,10 +1,11 @@
 import FakePostsRepository from '../../database/typeorm/repositories/fakes/FakePostsRepository';
 import CreateUserService from '../UserServices/CreateUserService';
 import CreatePostService from '../PostServices/CreatePostService';
-import ShowOnePostService from '../PostServices/ShowOnePostService';
 import FakeHashProvider from '../../provider/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../../database/typeorm/repositories/fakes/FakeUsersRepository';
 import CreateCommentService from './CreateCommentService';
+import AppError from '../../errors/AppError';
+import DeleteCommentService from './DeleteCommentService';
 import FakeCommentsRepository from '../../database/typeorm/repositories/fakes/FakeCommentsRepository';
 
 let fakeUsersRepository: FakeUsersRepository;
@@ -13,9 +14,10 @@ let createUser: CreateUserService;
 let createPost: CreatePostService;
 let fakeHashProvider: FakeHashProvider;
 let createComment: CreateCommentService;
+let deleteComment: DeleteCommentService;
 let fakeCommentsRepository: FakeCommentsRepository;
 
-describe('Create Comment', () => {
+describe('Delete Comment', () => {
   beforeEach(() => {
     fakePostRepository = new FakePostsRepository();
     fakeHashProvider = new FakeHashProvider();
@@ -24,6 +26,7 @@ describe('Create Comment', () => {
     createComment = new CreateCommentService(fakeCommentsRepository);
     createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
     createPost = new CreatePostService(fakePostRepository);
+    deleteComment = new DeleteCommentService(fakeCommentsRepository);
   });
   it('Should be able to create a comment in a post', async () => {
     const user = await createUser.execute({
@@ -40,6 +43,12 @@ describe('Create Comment', () => {
       user_id: user.id,
       post_id: post.id,
     });
-    expect(comment).toHaveProperty('id');
+    await expect(
+      updateComment.execute({
+        content: 'First Comment',
+        id: comment.id,
+        user_id: 'another user id here',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

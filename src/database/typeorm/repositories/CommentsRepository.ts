@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import ICommentsRepository from './interfaces/ICommentsRepository';
 import ICreateCommentDTO from './dtos/ICreateCommentDTO';
 import Comment from '../entities/Comment';
+import IUpdateCommentDTO from './dtos/IUpdateCommentDTO';
 
 class CommentsRepository implements ICommentsRepository {
   private ormRepository: Repository<Comment>;
@@ -11,7 +12,6 @@ class CommentsRepository implements ICommentsRepository {
   }
 
   public async create(commentData: ICreateCommentDTO): Promise<Comment> {
-    console.log(commentData);
     const comment = this.ormRepository.create(commentData);
 
     await this.ormRepository.save(comment);
@@ -20,7 +20,7 @@ class CommentsRepository implements ICommentsRepository {
   }
 
   public async delete(id: string): Promise<void> {
-    const comment = await this.ormRepository.find({
+    const comment = await this.ormRepository.findOne({
       where: {
         id,
       },
@@ -44,7 +44,7 @@ class CommentsRepository implements ICommentsRepository {
     return comment;
   }
 
-  public async save(data: ICreateCommentDTO): Promise<Comment> {
+  public async save(data: IUpdateCommentDTO): Promise<Comment> {
     return this.ormRepository.save(data);
   }
 }
