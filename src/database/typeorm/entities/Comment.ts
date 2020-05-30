@@ -22,10 +22,11 @@ class Comment {
   user_id: string;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
+  // @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToOne(() => Post, post => post.comment)
+  @ManyToOne(() => Post, post => post.comment_id)
+  // @JoinColumn({ name: 'post_id' })
   post: Post;
 
   @Column('uuid')

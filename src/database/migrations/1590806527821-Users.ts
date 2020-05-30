@@ -1,7 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateUsers1590448188319 implements MigrationInterface {
+export default class Users1590806527821 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
     await queryRunner.createTable(
       new Table({
         name: 'users',
@@ -23,11 +24,7 @@ export default class CreateUsers1590448188319 implements MigrationInterface {
             isUnique: true,
           },
           {
-            name: 'password',
-            type: 'varchar',
-          },
-          {
-            name: 'created_at',
+            name: 'create_at',
             type: 'timestamp',
             default: 'now()',
           },

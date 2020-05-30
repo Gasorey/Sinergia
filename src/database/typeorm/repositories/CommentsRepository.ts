@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
-import Comment from '../entities/Comment';
 import ICommentsRepository from './interfaces/ICommentsRepository';
 import ICreateCommentDTO from './dtos/ICreateCommentDTO';
+import Comment from '../entities/Comment';
 
 class CommentsRepository implements ICommentsRepository {
   private ormRepository: Repository<Comment>;
@@ -10,16 +10,9 @@ class CommentsRepository implements ICommentsRepository {
     this.ormRepository = getRepository(Comment);
   }
 
-  public async create({
-    post_id,
-    content,
-    user_id,
-  }: ICreateCommentDTO): Promise<Comment> {
-    const comment = this.ormRepository.create({
-      content,
-      post_id,
-      user_id,
-    });
+  public async create(commentData: ICreateCommentDTO): Promise<Comment> {
+    const comment = this.ormRepository.create(commentData);
+
     console.log(comment);
     await this.ormRepository.save(comment);
 
