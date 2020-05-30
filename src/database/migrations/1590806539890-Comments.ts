@@ -23,15 +23,15 @@ export default class Comments1590806539890 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'user',
+            name: 'user_id',
             type: 'uuid',
           },
           {
-            name: 'post',
+            name: 'post_id',
             type: 'uuid',
           },
           {
-            name: 'create_at',
+            name: 'created_at',
             type: 'timestamp',
             default: 'now()',
           },

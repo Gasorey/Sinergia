@@ -6,7 +6,7 @@ export default class Keys1590812300765 implements MigrationInterface {
       'comments',
       new TableForeignKey({
         name: 'MyKeyToPosts',
-        columnNames: ['post'],
+        columnNames: ['post_id'],
         referencedTableName: 'posts',
         referencedColumnNames: ['id'],
         onDelete: 'SET NULL',
@@ -17,7 +17,7 @@ export default class Keys1590812300765 implements MigrationInterface {
       'comments',
       new TableForeignKey({
         name: 'MyKeyToUsers',
-        columnNames: ['user'],
+        columnNames: ['user_id'],
         referencedTableName: 'users',
         referencedColumnNames: ['id'],
         onDelete: 'SET NULL',
@@ -28,7 +28,7 @@ export default class Keys1590812300765 implements MigrationInterface {
       'posts',
       new TableForeignKey({
         name: 'MyKeyToUsersInfo',
-        columnNames: ['user'],
+        columnNames: ['user_id'],
         referencedTableName: 'users',
         referencedColumnNames: ['id'],
         onDelete: 'SET NULL',
@@ -39,7 +39,7 @@ export default class Keys1590812300765 implements MigrationInterface {
       'posts',
       new TableForeignKey({
         name: 'MyKeyToCommentsInfo',
-        columnNames: ['comment'],
+        columnNames: ['comment_id'],
         referencedTableName: 'comments',
         referencedColumnNames: ['id'],
         onDelete: 'SET NULL',

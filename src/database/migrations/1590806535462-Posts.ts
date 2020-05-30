@@ -18,16 +18,16 @@ export default class Posts1590806535462 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'user',
+            name: 'user_id',
             type: 'uuid',
           },
           {
-            name: 'comment',
+            name: 'comment_id',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'create_at',
+            name: 'created_at',
             type: 'timestamp',
             default: 'now()',
           },
