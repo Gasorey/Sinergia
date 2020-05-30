@@ -18,9 +18,11 @@ export default class UpdatePostService {
     id,
   }: IUpdatePostDTO): Promise<Post> {
     const findPost = await this.postRepository.findPostById(id);
+
     if (!findPost) {
       throw new AppError('This post does not exist');
     }
+<<<<<<< HEAD
     if (findPost.user_id !== user_id) {
       throw new AppError('You cannot update a post from another user');
     }
@@ -28,5 +30,7 @@ export default class UpdatePostService {
     await this.postRepository.save(findPost);
 
     return findPost;
+=======
+>>>>>>> parent of 560af20... sinergia test on going
   }
 }

@@ -16,7 +16,7 @@ class CreatePostsService {
   ) {}
 
   public async execute({ content, user_id }: IRequest): Promise<Post> {
-    const post = await this.postsRepository.create({
+    const post = this.postsRepository.create({
       content,
       user_id,
     });

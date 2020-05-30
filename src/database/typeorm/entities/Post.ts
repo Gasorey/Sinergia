@@ -35,7 +35,7 @@ class Post {
   @Column('uuid')
   comment_id: string;
 
-  // @OneToMany(() => Comment, comment => comment.post.comment_id)
-  // comment: Comment[];
+  @OneToMany(() => Comment, comment => comment.post.comment_id)
+  comment: Comment[];
 }
 export default Post;

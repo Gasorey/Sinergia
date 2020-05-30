@@ -18,19 +18,13 @@ class Comment {
   @Column('varchar')
   content: string;
 
-  @Column('uuid')
-  user_id: string;
-
   @ManyToOne(() => User)
-  // @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @ManyToOne(() => Post, post => post.comment_id)
-  // @JoinColumn({ name: 'post_id' })
+  @JoinColumn({ name: 'post_id' })
   post: Post;
-
-  @Column('uuid')
-  post_id: string;
 
   @CreateDateColumn()
   created_at: Date;
