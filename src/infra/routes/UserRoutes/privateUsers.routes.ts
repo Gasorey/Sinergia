@@ -8,7 +8,7 @@ const privateUsersController = new PrivateUsersController();
 
 privateUserRouter.use(ensureAuthenticated);
 privateUserRouter.get('/', privateUsersController.show);
-privateUserRouter.put('/update', privateUsersController.update);
-privateUserRouter.delete('/delete', privateUsersController.delete);
+privateUserRouter.put('/', privateUsersController.update);
+privateUserRouter.delete('/', privateUsersController.delete);
 
 export default privateUserRouter;
