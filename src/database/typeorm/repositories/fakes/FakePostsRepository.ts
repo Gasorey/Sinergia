@@ -31,7 +31,7 @@ class FakePostsRepository implements IPostsRepository {
     return post;
   }
 
-  public async save({ user_id, content, id }: IUpdatePostDTO): Promise<Post> {
+  public async save({ content, id }: IUpdatePostDTO): Promise<Post> {
     const findIndex = this.posts.findIndex(findPost => findPost.id === id);
 
     const post = this.posts[findIndex];

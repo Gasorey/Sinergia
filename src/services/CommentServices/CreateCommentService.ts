@@ -1,5 +1,4 @@
 import { inject, injectable } from 'tsyringe';
-import AppError from '../../errors/AppError';
 
 import Comment from '../../database/typeorm/entities/Comment';
 import ICommentsRepository from '../../database/typeorm/repositories/interfaces/ICommentsRepository';

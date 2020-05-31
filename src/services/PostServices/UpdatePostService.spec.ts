@@ -45,7 +45,7 @@ describe('List Posts from data base', () => {
       email: 'gasorey@gmail.com',
       password: '123456',
     });
-    const post = await createPost.execute({
+    await createPost.execute({
       content: 'Test post',
       user_id: user.id,
     });

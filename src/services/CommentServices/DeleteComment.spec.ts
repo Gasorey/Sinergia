@@ -28,7 +28,7 @@ describe('Delete Comment', () => {
     createPost = new CreatePostService(fakePostRepository);
     deleteComment = new DeleteCommentService(fakeCommentsRepository);
   });
-  it('Should be able to create a comment in a post', async () => {
+  it('Should be able to delete a comment in a post', async () => {
     const user = await createUser.execute({
       name: 'Gabriel Asorey',
       email: 'gasorey@gmail.com',
@@ -43,7 +43,26 @@ describe('Delete Comment', () => {
       user_id: user.id,
       post_id: post.id,
     });
-    await deleteComment.execute(comment.id, user.id);
+    await deleteComment.execute(user.id, comment.id);
     expect(!comment);
+  });
+  it('Should not be able to delete a comment from another user', async () => {
+    const user = await createUser.execute({
+      name: 'Gabriel Asorey',
+      email: 'gasorey@gmail.com',
+      password: '123456',
+    });
+    const post = await createPost.execute({
+      content: 'Post for testing',
+      user_id: user.id,
+    });
+    const comment = await createComment.execute({
+      content: 'First comment',
+      user_id: user.id,
+      post_id: post.id,
+    });
+    await expect(
+      deleteComment.execute('wrong-user-id', comment.id),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

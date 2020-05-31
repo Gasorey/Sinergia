@@ -1,4 +1,3 @@
-import AppError from '../../errors/AppError';
 import FakePostsRepository from '../../database/typeorm/repositories/fakes/FakePostsRepository';
 import CreateUserService from '../UserServices/CreateUserService';
 import CreatePostService from './CreatePostService';

@@ -43,7 +43,7 @@ class FakeCommentsRepository implements ICommentsRepository {
 
   public async save({
     content,
-    user_id,
+
     id,
   }: IUpdateCommentDTO): Promise<Comment> {
     const findIndex = this.comments.findIndex(

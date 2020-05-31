@@ -1,7 +1,6 @@
 import FakePostsRepository from '../../database/typeorm/repositories/fakes/FakePostsRepository';
 import CreateUserService from '../UserServices/CreateUserService';
 import CreatePostService from '../PostServices/CreatePostService';
-import ShowOnePostService from '../PostServices/ShowOnePostService';
 import FakeHashProvider from '../../provider/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../../database/typeorm/repositories/fakes/FakeUsersRepository';
 import CreateCommentService from './CreateCommentService';

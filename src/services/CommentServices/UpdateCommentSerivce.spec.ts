@@ -28,7 +28,7 @@ describe('Update Comment', () => {
     createPost = new CreatePostService(fakePostRepository);
     updateComment = new UpdateCommentService(fakeCommentsRepository);
   });
-  it('Should be able to create a comment in a post', async () => {
+  it('Should be able to update a comment in a post', async () => {
     const user = await createUser.execute({
       name: 'Gabriel Asorey',
       email: 'gasorey@gmail.com',
@@ -50,7 +50,7 @@ describe('Update Comment', () => {
     });
     expect(updatedComment.content).toBe('This comment have been updated');
   });
-  it('Should be able to create a comment in a post', async () => {
+  it('Should not be able to update a comment from another user', async () => {
     const user = await createUser.execute({
       name: 'Gabriel Asorey',
       email: 'gasorey@gmail.com',
