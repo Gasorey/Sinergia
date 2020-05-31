@@ -3,6 +3,7 @@ import AppError from '../../errors/AppError';
 import Comment from '../../database/typeorm/entities/Comment';
 import ICommentsRepository from '../../database/typeorm/repositories/interfaces/ICommentsRepository';
 import IUpdateComments from '../../database/typeorm/repositories/dtos/IUpdatePostDTO';
+
 @injectable()
 export default class UpdateCommentService {
   constructor(

@@ -43,12 +43,7 @@ describe('Delete Comment', () => {
       user_id: user.id,
       post_id: post.id,
     });
-    await expect(
-      updateComment.execute({
-        content: 'First Comment',
-        id: comment.id,
-        user_id: 'another user id here',
-      }),
-    ).rejects.toBeInstanceOf(AppError);
+    await deleteComment.execute(comment.id, user.id);
+    expect(!comment);
   });
 });
