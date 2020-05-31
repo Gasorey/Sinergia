@@ -65,4 +65,9 @@ describe('Delete Comment', () => {
       deleteComment.execute('wrong-user-id', comment.id),
     ).rejects.toBeInstanceOf(AppError);
   });
+  it('Should not be able delete not exist comment ', async () => {
+    await expect(
+      deleteComment.execute('fake_user_id', 'fake_id'),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

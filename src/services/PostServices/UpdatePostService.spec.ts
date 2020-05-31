@@ -57,24 +57,7 @@ describe('List Posts from data base', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
-  it('Should be able to update a post', async () => {
-    const user = await createUser.execute({
-      name: 'Gabriel Asorey',
-      email: 'gasorey@gmail.com',
-      password: '123456',
-    });
-    const post = await createPost.execute({
-      content: 'Test post',
-      user_id: user.id,
-    });
-    const updatedPost = await updatePost.execute({
-      content: 'Updated Test Post',
-      id: post.id,
-      user_id: user.id,
-    });
-    expect(updatedPost.content).toBe('Updated Test Post');
-  });
-  it('Should not be able to update a post with wrong post id', async () => {
+  it('Should not be able to update a post with wrong user id', async () => {
     const user = await createUser.execute({
       name: 'Gabriel Asorey',
       email: 'gasorey@gmail.com',

@@ -12,6 +12,9 @@ class DeleteCommentService {
   public async execute(user_id: string, id: string): Promise<void> {
     const comment = await this.commentsRepository.findCommentById(id);
 
+    if (!comment) {
+      throw new AppError('This comment does not exist');
+    }
     if (comment.user_id !== user_id) {
       throw new AppError('You can not delete a comment from another user');
     }
